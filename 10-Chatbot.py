@@ -1,10 +1,9 @@
 from openai import OpenAI
 from dotenv import load_dotenv
 import os
-# client = OpenAI(
-#     api_key="sk-replace-with-your-own-key",
-# )
+
 load_dotenv()
+
 client = OpenAI(
     api_key=os.getenv('OPENAI_API_KEY')
 )
@@ -25,10 +24,9 @@ messages = [{"role": "assistant", "content": "How can I help?"}]
 
 while True:
     display_chat_history(messages)
-     
     user_input = input("User: ")
-    messages.append({"role": "user", "content": user_input})
     if user_input.lower() in ["exit", "quit"]:
         break
+    messages.append({"role": "user", "content": user_input})
     assistant_response = get_assistant_response(messages)
     messages.append({"role": "assistant", "content": assistant_response})
